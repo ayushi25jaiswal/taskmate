@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Todolist- Taskmate</title>
+{%endblock title%}
+
+ {%block content%}
+<br>
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{%endfor%}
+{%endif%}
+<div style="padding: 25px 100px 25px 100px;">
+<form method="POST">
+    {%csrf_token%}
+  <div class="mb-3">
+    <input type="text" class="form-control" name="task" placeholder="New Task ?">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add Task</button>
+</form>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Task</th>
+      <th scope="col">Done</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+<tbody>
+{%if all_task%}
+{%for obj in all_task%}
+
+{%if obj.done%}
+
+      <tr class="table-success">
+        <td>{{obj.task}}</td>
+        <td>Completed</td>
+        <td>Edit</td>
+        <td>Delete</td>
+      </tr>
+
+      {%else%}
+    <tr>
+            <td>{{obj.task}}</td>
+            <td>Not Completed</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+
+{%endif%}
+
+
+<br>
+{%endfor%}
+{%endif%}
+  </tbody>
+</table>
+  </div>
+
+ {%endblock content%}
