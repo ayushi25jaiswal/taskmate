@@ -17,13 +17,11 @@
 {%endfor%}
 {%endif%}
 <div style="padding: 25px 100px 25px 100px;">
-<form method="POST">
+<form method="POST" class="row">
     {%csrf_token%}
-  <div class="mb-3">
-    <input type="text" class="form-control" name="task" placeholder="New Task ?">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Add Task</button>
+    <label class="col-lg-4"></label>
+    <input type="text" class="form-control col-lg-6" name="task" placeholder="New Task ?">
+    <button type="submit" class="btn btn-primary col-lg-2">Add Task</button>
 </form>
 <table class="table table-bordered">
   <thead class="table-dark">
@@ -42,17 +40,17 @@
 
       <tr class="table-success">
         <td>{{obj.task}}</td>
-        <td>Completed</td>
-        <td>Edit</td>
-        <td>Delete</td>
+        <td><a href="{% url 'pending_task' obj.id%}">Completed</a></td>
+        <td><a href="{% url 'edit_task' obj.id%}">Edit</a></td>
+        <td><a href="{% url 'delete_task' obj.id%}">Delete</a> </td>
       </tr>
 
       {%else%}
     <tr>
             <td>{{obj.task}}</td>
-            <td>Not Completed</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td><a href="{% url 'complete_task' obj.id%}">Pending</a></td>
+            <td><a href="{% url 'edit_task' obj.id%}">Edit</a></td>
+            <td><a href="{% url 'delete_task' obj.id%}">Delete</a></td>
           </tr>
 
 {%endif%}
