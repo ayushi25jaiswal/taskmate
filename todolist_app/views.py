@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from todolist_app.models import TaskList
 from todolist_app.forms import TaskForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def todolist(request):
     if request.method == 'POST':
@@ -11,7 +12,10 @@ def todolist(request):
         messages.success(request, ('New Task Added!'))
         return redirect('todolist')
     else:
-        all_task = TaskList.objects.all
+        all_task = TaskList.objects.all()
+        paginator = Paginator(all_task, 7)
+        page = request.GET.get('pg')
+        all_task = paginator.get_page(page)
         return render(request, 'todolist.html', {'all_task': all_task})
 
 def delete_task(request, task_id):
@@ -52,3 +56,6 @@ def contact(request):
 
 def about(request):
     return render(request, 'about.html', {'about_text': "Welcome to about"})
+
+def index(request):
+    return render(request, 'index.html', {'index_text': "Welcome to HOME"})
