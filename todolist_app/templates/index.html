@@ -1,9 +1,36 @@
 {%extends 'base.html'%}
-
+{%load static%}
 {%block title%}
 <title>HOME- Taskmate</title>
 {%endblock title%}
 
  {%block content%}
-<h1>{{index_text}}</h1>
+
+<!--<table>-->
+<!-- <tr>-->
+<!--   <td><img src="static/images/todolist.jpg" style="width:60%;height:80%; padding:120px 0px 0px 150px "></td>-->
+<!--   <td><p style="font-family: 'Merriweather', serif; font-size:70px;">Task MaTe </p></td>-->
+<!--   -->
+<!-- </tr>-->
+<!--</table>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="static/images/todolist.jpg" style="width:60%;height:100%; padding:100px 0px 0px 90px ">
+    </div>
+    <div class="col">
+      <p style="font-family: 'Merriweather', serif; font-size:70px; padding: 100px 0px 0px 0px;">Task MaTe </p>
+        <br>
+        <p style="padding-left:50px">You can do it if you taskmate it.</p>
+        <br>
+        <div style="padding-left:80px" >
+            <a class="btn btn-primary" href="#" role="button" >Getting Started</a>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
  {%endblock content%}
