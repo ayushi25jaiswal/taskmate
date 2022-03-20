@@ -3,16 +3,20 @@ from todolist_app.models import TaskList
 from todolist_app.forms import TaskForm
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def todolist(request):
     if request.method == 'POST':
         form = TaskForm(request.POST or None)
         if form.is_valid():
+            form.save(commit=False).manage = request.user
             form.save()
         messages.success(request, ('New Task Added!'))
         return redirect('todolist')
     else:
-        all_task = TaskList.objects.all()
+        all_task = TaskList.objects.filter(manage=request.user)
         paginator = Paginator(all_task, 7)
         page = request.GET.get('pg')
         all_task = paginator.get_page(page)
